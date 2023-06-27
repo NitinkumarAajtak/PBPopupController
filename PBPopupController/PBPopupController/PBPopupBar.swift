@@ -1064,7 +1064,8 @@ internal let PBPopupBarImageHeightCompact: CGFloat = 40.0
         if PBPopupBarShowColors == true {
             self.safeAreaToolbar.setBackgroundImage(nil, forToolbarPosition: .bottom, barMetrics: .default)
             self.safeAreaToolbar.setShadowImage(nil, forToolbarPosition: .topAttached)
-            self.safeAreaToolbar.barTintColor = UIColor.blue
+            //self.safeAreaToolbar.barTintColor = UIColor.blue
+            self.safeAreaToolbar.layerGradient(using: UIColor(red: 94/255, green: 5/255, blue: 33/255, alpha: 1.0).cgColor, and: UIColor(red: 204/255, green: 0/255, blue: 0/255, alpha: 1.0).cgColor)
         }
         
         if self.safeAreaToolbar.translatesAutoresizingMaskIntoConstraints == true {
@@ -1660,5 +1661,36 @@ extension PBPopupBar
         required init(coder aDecoder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
+    }
+}
+
+extension UIToolbar {
+    
+    func layerGradient(using color0: CGColor,and color1: CGColor, viewWidth: CGFloat? = nil) {
+        let layer : CAGradientLayer = CAGradientLayer()
+        if let width = viewWidth {
+            layer.frame.size = CGSize(width: width, height: self.frame.height)
+        } else {
+            layer.frame.size = self.frame.size
+        }
+        
+        layer.startPoint = CGPoint(x: 0.0, y: 0.5)
+        layer.endPoint = CGPoint(x: 1.0, y: 0.5)
+        let color0 = color0
+        let color1 = color1
+        
+        layer.colors = [color0,color1]
+        
+        UIGraphicsBeginImageContext(layer.bounds.size)
+        if let graphicsContext = UIGraphicsGetCurrentContext() {
+            layer.render(in: graphicsContext)
+        }
+        let gradientImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        if let image = gradientImage {
+            self.backgroundColor = UIColor(patternImage: image)
+        }
+        self.layer.insertSublayer(layer, at: 0)
     }
 }
