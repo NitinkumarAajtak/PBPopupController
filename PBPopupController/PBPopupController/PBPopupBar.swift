@@ -1083,6 +1083,7 @@ internal let PBPopupBarImageHeightCompact: CGFloat = 40.0
             self.toolbar.setBackgroundImage(nil, forToolbarPosition: .bottom, barMetrics: .default)
             self.toolbar.setShadowImage(nil, forToolbarPosition: .topAttached)
             self.toolbar.barTintColor = UIColor.orange
+            self.toolbar.isHidden = true
         }
         if self.backgroundView.translatesAutoresizingMaskIntoConstraints == true {
             self.backgroundView.translatesAutoresizingMaskIntoConstraints = false
