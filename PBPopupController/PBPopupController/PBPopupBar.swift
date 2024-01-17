@@ -1065,7 +1065,9 @@ internal let PBPopupBarImageHeightCompact: CGFloat = 40.0
             self.safeAreaToolbar.setBackgroundImage(nil, forToolbarPosition: .bottom, barMetrics: .default)
             self.safeAreaToolbar.setShadowImage(nil, forToolbarPosition: .topAttached)
             //self.safeAreaToolbar.barTintColor = UIColor.blue
-            self.safeAreaToolbar.layerGradient(using: UIColor(red: 94/255, green: 5/255, blue: 33/255, alpha: 1.0).cgColor, and: UIColor(red: 204/255, green: 0/255, blue: 0/255, alpha: 1.0).cgColor)
+            DispatchQueue.main.async {
+                self.safeAreaToolbar.layerGradient(using: UIColor(red: 94/255, green: 5/255, blue: 33/255, alpha: 1.0).cgColor, and: UIColor(red: 204/255, green: 0/255, blue: 0/255, alpha: 1.0).cgColor)
+            }
         }
         
         if self.safeAreaToolbar.translatesAutoresizingMaskIntoConstraints == true {
